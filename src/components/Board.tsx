@@ -1,39 +1,22 @@
 import React from 'react';
 import List from './List';
+import { useAppDispatch, useAppSelector } from '../store';
+import { deleteList } from '../slices/listsSlice';
 
 const Board: React.FC = () => {
-    const lists = [
-        {
-            title: 'To Do',
-            cards: [
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' }
-            ],
-        },
-        {
-            title: 'To Do',
-            cards: [
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'TSed viverra, diam eu facilisis bibendum, ante orci placerat quam' }
-            ],
-        },
-        {
-            title: 'To Do',
-            cards: [
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' },
-                { title: 'Lorem ipsum dolor', description: 'Sed viverra, diam eu facilisis bibendum, ante orci placerat quam' }
-            ],
-        }
-    ];
+    const dispatch = useAppDispatch();
+    const lists = useAppSelector(state => state.Lists.lists);
+    const cards = useAppSelector(state => state.Lists.cards);
+
+    const handleDeleteList = (id: string) => {
+        dispatch(deleteList(id));
+    };
 
     return (
         <div className="m-auto h-screen w-screen overflow-x-scroll text-center">
             <div className="flex h-full space-x-4">
-                {lists.map((list, index) => (
-                    <List key={index} title={list.title} cards={list.cards} />
+                {lists.map(list => (
+                    <List key={list.id} id={list.id} title={list.title} cards={list.cardIds.map(cardId => cards[cardId])} onDelete={handleDeleteList} />
                 ))}
             </div>
         </div>
