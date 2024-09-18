@@ -1,7 +1,11 @@
 import React from 'react';
 
-const DeleteCardButton: React.FC = () => (
-    <button className="hidden group-hover/card:block" onClick={() => alert('Delete card')}>
+interface DeleteCardButtonProps {
+    onClick: () => void;
+}
+
+const DeleteCardButton: React.FC<DeleteCardButtonProps> = ({ onClick }) => (
+    <button className="hidden group-hover/card:block" onClick={onClick}>
         <svg
             className="h-[20px] w-[20px]"
             xmlns="http://www.w3.org/2000/svg"

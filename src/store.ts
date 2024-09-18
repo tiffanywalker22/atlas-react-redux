@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import listsSlice from './slices/listsSlice';
+import cardsSlice from './slices/cardsSlice';
+
 
 
 export const store = configureStore({
   reducer: {
     Lists: listsSlice,
+    Cards: cardsSlice,
   },
 });
 
