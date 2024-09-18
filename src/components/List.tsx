@@ -21,7 +21,7 @@ const List: React.FC<ListProps> = ({ id, title, cards, onDelete }) => {
             {cards.map(card => (
                 <Card key={card.id} title={card.title} description={card.description} />
             ))}
-            <NewCardForm />
+            <NewCardForm listId={id} />
         </div>
     );
 };
