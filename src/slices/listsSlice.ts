@@ -41,6 +41,19 @@ export const listSlice = createSlice({
                 list.cardIds.push(card.id);
             }
         },
+        moveCard: (state, action: PayloadAction<{ sourceListId: string; targetListId: string; cardId: string; }>) => {
+            const { sourceListId, targetListId, cardId } = action.payload;
+            const sourceList = state.lists.find(list => list.id === sourceListId);
+            if (sourceList) {
+                sourceList.cardIds = sourceList.cardIds.filter(id => id !== cardId);
+            }
+
+            const targetList = state.lists.find(list => list.id === targetListId);
+            if (targetList) {
+                targetList.cardIds.push(cardId);
+            }
+        },
+
         clearBoard: (state) => {
             state.lists = [];
             state.cards = {};
@@ -48,6 +61,6 @@ export const listSlice = createSlice({
     },
 });
 
-export const { addList, deleteList, addCardToList, clearBoard } = listSlice.actions;
+export const { addList, deleteList, addCardToList, moveCard, clearBoard } = listSlice.actions;
 
 export default listSlice.reducer;

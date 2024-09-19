@@ -25,6 +25,10 @@ const cardsSlice = createSlice ({
         deleteCard: (state, action: PayloadAction<string>) => {
             delete state.cards[action.payload];
         },
+
+        clearBoard: (state) => {
+            state.cards = {};
+        },
     },
 });
 
